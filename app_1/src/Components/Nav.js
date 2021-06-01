@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 export default function Nav(){
     return(
         <Navbar expand="lg" variant="dark" bg="#112B3E">
-            <NavLink to="/">
+            <NavLink to="/articles">
                 <Navbar.Brand href="SHARETRADE.COM">SHARETRADE.COM</Navbar.Brand>
             </NavLink>
             
