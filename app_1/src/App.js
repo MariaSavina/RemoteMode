@@ -2,19 +2,36 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Nav from './Components/Nav';
 import AllCards from './Components/AllCards';
-import {BrowserRouter as Router, Redirect, Switch, Route} from 'react-router-dom';
-import data from './data.json'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Articles from './Components/Articles';
+import firebase from 'firebase';
+import React, { useEffect, useState } from 'react';
+import { validateCreatingCard } from './assets/validation';
 
 
 
 function App() {
-  const articles=data.map((el)=>{
-    return(
-    <Route exact path={`/articles/${el.id}`} key={el.id}>
-      <Articles description={el.articleDescr} src={el.img} title={el.description} commentName={el.commentName} сomment={el.сomment}/>
-    </Route>
-  )})
+  const [fireCollection, setFireCollection] = useState([]);
+
+  const getData = async () => {
+    const db = firebase.firestore();
+    const collections = await db.collection('reactdeved').get();
+    const beforeValidate = collections.docs.map(el => el.data());
+    setFireCollection(validateCreatingCard(beforeValidate));
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const articles = fireCollection.map(el => {
+    return (
+      <Route path={`/articles/${el.id}`} key={el.id}>
+        <Articles description={el.description} src={el.imageUrl} title={el.title} сomment={el.expertComment} />
+      </Route>
+    );
+  });
+
+
   return (
     <div className="App">
      
@@ -24,7 +41,9 @@ function App() {
             <Nav />
           </header>
           <Switch>
-            <Route exact path="/" component={AllCards}/>
+            <Route exact path="/articles">
+              <AllCards data={fireCollection}/>
+              </Route> 
             {articles}
           </Switch>
         </Router>
