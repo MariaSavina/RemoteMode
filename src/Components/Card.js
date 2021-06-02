@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
 import { NavLink } from 'react-router-dom';
 
 export default function OneCard(props){
@@ -24,5 +24,5 @@ export default function OneCard(props){
                 </Card.Body>
             </Card>
         </NavLink>
-    )
+    );
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import OneCard from './Card'
+import React from 'react';
+import OneCard from './Card';
 
 export default function AllCards(props){
     const createCard = () => {
@@ -9,5 +9,5 @@ export default function AllCards(props){
         <div className="cardBox">
             {createCard()}
         </div>
-    )
+    );
 }

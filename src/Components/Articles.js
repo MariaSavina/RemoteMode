@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 
 export default function Articles(props){
@@ -9,5 +9,5 @@ export default function Articles(props){
             <div className="bigDescription">{props.description}</div>
             <div className="bigComment">{props.сomment}</div>
         </div>
-    )
+    );
 }
